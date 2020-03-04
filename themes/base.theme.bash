@@ -118,7 +118,6 @@ function scm_prompt_info {
 
 function scm_prompt_char_info {
   scm_prompt_char
-  echo -ne "${SCM_THEME_CHAR_PREFIX}${SCM_CHAR}${SCM_THEME_CHAR_SUFFIX}"
   scm_prompt_info_common
 }
 
@@ -127,13 +126,7 @@ function scm_prompt_info_common {
   SCM_STATE=''
 
   if [[ ${SCM} == ${SCM_GIT} ]]; then
-    if [[ ${SCM_GIT_SHOW_MINIMAL_INFO} == true ]]; then
-      # user requests minimal git status information
-      git_prompt_minimal_info
-    else
-      # more detailed git status
-      git_prompt_info
-    fi
+    git_prompt_minimal_info
     return
   fi
 
@@ -158,7 +151,7 @@ function git_prompt_minimal_info {
   # Output the git prompt
   SCM_PREFIX=${SCM_THEME_PROMPT_PREFIX}
   SCM_SUFFIX=${SCM_THEME_PROMPT_SUFFIX}
-  echo -e "${SCM_PREFIX}${SCM_BRANCH}${SCM_STATE}${SCM_SUFFIX}"
+  echo -e "${bold_green} git (${reset_color}${bold_red}${SCM_BRANCH}${reset_color}${SCM_SUFFIX}${SCM_STATE}${reset_color}"
 }
 
 function git_prompt_vars {
